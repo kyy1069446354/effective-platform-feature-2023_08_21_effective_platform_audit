@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinapost.sd.effective.system.mapper.AuditRuleMapper">
+
+    <sql id="Base_Column_List">
+        id,
+        audit_rule_id,
+        audit_type,
+        status,
+        note,
+        creator_id,
+        creator_name,
+        create_time,
+        updater_id,
+        updater_name,
+        update_time
+    </sql>
+
+    <sql id="List_Where_Clause">
+        <where>
+           <if test="query.id != null">
+              and id = #{query.id}
+           </if>
+           <if test="query.auditRuleId != null">
+              and audit_rule_id = #{query.auditRuleId}
+           </if>
+           <if test="query.auditType != null">
+              and audit_type = #{query.auditType}
+           </if>
+           <if test="query.status != null">
+              and status = #{query.status}
+           </if>
+           <if test="query.note != null">
+              and note = #{query.note}
+           </if>
+       </where>
+    </sql>
+
+   <select id="selectByPage" resultType="com.chinapost.sd.effective.system.domain.po.AuditRulePO">
+       select * from audit_rule
+       <include refid="List_Where_Clause"/>
+   </select>
+
+   <select id="selectByList" resultType="com.chinapost.sd.effective.system.domain.po.AuditRulePO">
+       select * from audit_rule
+       <include refid="List_Where_Clause"/>
+   </select>
+</mapper>
