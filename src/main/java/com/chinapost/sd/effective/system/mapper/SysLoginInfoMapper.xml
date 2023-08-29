@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinapost.sd.effective.system.mapper.SysLoginInfoMapper">
+
+    <sql id="Base_Column_List">
+        id,
+        username,
+        ip_address,
+        login_location,
+        browser,
+        operation_system,
+        status,
+        msg,
+        login_time,
+        deleted,
+        creator_id,
+        creator_name,
+        create_time,
+        updater_id,
+        updater_name,
+        update_time
+    </sql>
+
+    <sql id="List_Where_Clause">
+        <where>
+
+            <if test="query.username != null and query.username != ''">
+                and username like concat('%', concat(#{query.username}, '%'))
+            </if>
+            <if test="query.ipAddress != null">
+                and ip_address like concat('%', concat(#{query.ipAddress}, '%'))
+            </if>
+
+            <if test="query.status != null">
+                and status = #{query.status}
+            </if>
+
+            <if test="query.beginTime != null">
+                and login_time &gt;= #{query.beginTime}
+            </if>
+            <if test="query.endTime != null">
+                and login_time &lt;= #{query.endTime}
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectByPage" resultType="com.chinapost.sd.effective.system.domain.po.SysLoginInfoPO">
+       select * from sys_login_info
+       <include refid="List_Where_Clause"/>
+   </select>
+
+    <delete id="deleteAll">
+        TRUNCATE TABLE  sys_login_info
+    </delete>
+</mapper>

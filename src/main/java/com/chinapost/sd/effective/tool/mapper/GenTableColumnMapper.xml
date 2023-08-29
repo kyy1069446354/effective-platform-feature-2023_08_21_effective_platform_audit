@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinapost.sd.effective.tool.mapper.GenTableColumnMapper">
+
+    <sql id="Base_Column_List">
+        id,
+        table_id,
+        name,
+        comment,
+        data_type,
+        data_type_name,
+        class_type,
+        class_name,
+        is_primary,
+        is_not_null,
+        is_query,
+        query_type,
+        html_type,
+        dict_type,
+        creator_id,
+        creator_name,
+        create_time,
+        updater_id,
+        updater_name,
+        update_time
+    </sql>
+
+    <sql id="List_Where_Clause">
+        <where>
+           <if test="query.id != null">
+              and id = #{query.id}
+           </if>
+           <if test="query.tableId != null and query.tableId != ''">
+              and table_id = #{query.tableId}
+           </if>
+           <if test="query.name != null and query.name != ''">
+              and name = #{query.name}
+           </if>
+           <if test="query.comment != null and query.comment != ''">
+              and comment = #{query.comment}
+           </if>
+           <if test="query.dataType != null">
+              and data_type = #{query.dataType}
+           </if>
+           <if test="query.dataTypeName != null and query.dataTypeName != ''">
+              and data_type_name = #{query.dataTypeName}
+           </if>
+           <if test="query.javaType != null and query.javaType != ''">
+              and class_type = #{query.javaType}
+           </if>
+           <if test="query.javaName != null and query.javaName != ''">
+              and class_name = #{query.javaName}
+           </if>
+           <if test="query.isPrimary != null">
+              and is_primary = #{query.isPrimary}
+           </if>
+           <if test="query.isNotNull != null">
+              and is_not_null = #{query.isNotNull}
+           </if>
+           <if test="query.isQuery != null">
+              and is_query = #{query.isQuery}
+           </if>
+           <if test="query.queryType != null and query.queryType != ''">
+              and query_type = #{query.queryType}
+           </if>
+           <if test="query.htmlType != null and query.htmlType != ''">
+              and html_type = #{query.htmlType}
+           </if>
+           <if test="query.dictType != null and query.dictType != ''">
+              and dict_type = #{query.dictType}
+           </if>
+       </where>
+    </sql>
+    <delete id="deleteByTableIds">
+        delete from sys_gen_table_column where table_id in
+        <foreach item="item" index="index" collection="list"
+                 open="(" separator="," close=")" nullable="false">
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="selectByTableId" resultType="com.chinapost.sd.effective.tool.domain.po.GenTableColumnPO">
+        select * from sys_gen_table_column
+        where table_id = #{tableId}
+    </select>
+</mapper>

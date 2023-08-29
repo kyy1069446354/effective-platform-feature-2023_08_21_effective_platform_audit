@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinapost.sd.effective.system.mapper.SysConfigMapper">
+
+    <sql id="Base_Column_List">
+        id,
+        name,
+        code,
+        options,
+        value,
+        is_allow_change,
+        remark,
+        deleted,
+        creator_id,
+        creator_name,
+        create_time,
+        updater_id,
+        updater_name,
+        update_time
+    </sql>
+
+    <sql id="List_Where_Clause">
+        <where>
+            <if test="query.code != null and query.code != ''">
+                and code like concat('%', concat(#{query.code}, '%'))
+            </if>
+            <if test="query.name != null and query.name != ''">
+                and name like concat('%', concat(#{query.name}, '%'))
+            </if>
+            <if test="query.isAllowChange != null">
+                and is_allow_change = #{query.isAllowChange}
+            </if>
+            <if test="query.beginTime != null">
+                and create_time &gt; #{query.beginTime}
+            </if>
+            <if test="query.endTime != null">
+                and create_time &lt; #{query.endTime}
+            </if>
+        </where>
+    </sql>
+
+   <select id="selectByPage" resultType="com.chinapost.sd.effective.system.domain.po.SysConfigPO">
+       select * from sys_config
+       <include refid="List_Where_Clause"/>
+   </select>
+
+   <select id="selectByList" resultType="com.chinapost.sd.effective.system.domain.po.SysConfigPO">
+       select * from sys_config
+       <include refid="List_Where_Clause"/>
+   </select>
+
+    <select id="selectConfigByKey" resultType="com.chinapost.sd.effective.system.domain.po.SysConfigPO">
+        select * from sys_config where code = #{configKey}
+    </select>
+</mapper>

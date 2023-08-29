@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinapost.sd.effective.system.mapper.SysDictDataMapper">
+
+    <sql id="Base_Column_List">
+        id,
+        order_num,
+        label,
+        value,
+        dict_code,
+        css_class,
+        list_class,
+        is_default,
+        status,
+        remark,
+        creator_id,
+        creator_name,
+        create_time,
+        updater_id,
+        updater_name,
+        update_time
+    </sql>
+
+    <sql id="List_Where_Clause">
+        <where>
+            <if test="query.dictCode != null">
+                and dict_code = #{query.dictCode}
+            </if>
+           <if test="query.label != null and query.label != ''">
+              and label like concat('%', concat(#{query.label}, '%'))
+           </if>
+           <if test="query.status != null">
+              and status = #{query.status}
+           </if>
+       </where>
+    </sql>
+
+   <select id="selectByPage" resultType="com.chinapost.sd.effective.system.domain.po.SysDictDataPO">
+       select * from sys_dict_data
+       <include refid="List_Where_Clause"/>
+       order by order_num
+   </select>
+
+   <select id="selectByList" resultType="com.chinapost.sd.effective.system.domain.po.SysDictDataPO">
+       select * from sys_dict_data
+       <include refid="List_Where_Clause"/>
+       order by order_num
+   </select>
+    <select id="selectByDictCode" resultType="com.chinapost.sd.effective.system.domain.po.SysDictDataPO">
+        select * from sys_dict_data
+        where dict_code = #{dictCode}
+        order by order_num
+    </select>
+</mapper>

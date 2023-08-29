@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinapost.sd.effective.system.mapper.SysAuditorMapper">
+
+    <sql id="Base_Column_List">
+        id,
+        requester_id,
+        requester_name,
+        system_name,
+        system_head,
+        system_head_phone_number,
+        system_user,
+        business_access_method,
+        os_version,
+        middleware_user,
+        database_version,
+        resource_demand,
+        cpu_num,
+        memory_num,
+        disk_space,
+        request_date,
+        request_reason,
+        audit_result,
+        finish_time,
+        creator_id,
+        creator_name,
+        create_time,
+        updater_id,
+        updater_name,
+        update_time
+    </sql>
+
+    <sql id="List_Where_Clause">
+        <where>
+           <if test="query.id != null">
+              and id = #{query.id}
+           </if>
+           <if test="query.requesterId != null">
+              and requester_id = #{query.requesterId}
+           </if>
+           <if test="query.requesterName != null">
+              and requester_name = #{query.requesterName}
+           </if>
+           <if test="query.systemName != null">
+              and system_name = #{query.systemName}
+           </if>
+           <if test="query.systemHead != null">
+              and system_head = #{query.systemHead}
+           </if>
+           <if test="query.systemHeadPhoneNumber != null">
+              and system_head_phone_number = #{query.systemHeadPhoneNumber}
+           </if>
+           <if test="query.systemUser != null">
+              and system_user = #{query.systemUser}
+           </if>
+           <if test="query.businessAccessMethod != null">
+              and business_access_method = #{query.businessAccessMethod}
+           </if>
+           <if test="query.osVersion != null">
+              and os_version = #{query.osVersion}
+           </if>
+           <if test="query.middlewareUser != null">
+              and middleware_user = #{query.middlewareUser}
+           </if>
+           <if test="query.databaseVersion != null">
+              and database_version = #{query.databaseVersion}
+           </if>
+           <if test="query.resourceDemand != null">
+              and resource_demand = #{query.resourceDemand}
+           </if>
+           <if test="query.cpuNum != null">
+              and cpu_num = #{query.cpuNum}
+           </if>
+           <if test="query.memoryNum != null">
+              and memory_num = #{query.memoryNum}
+           </if>
+           <if test="query.diskSpace != null">
+              and disk_space = #{query.diskSpace}
+           </if>
+           <if test="query.requestDate != null">
+              and request_date = #{query.requestDate}
+           </if>
+           <if test="query.requestReason != null">
+              and request_reason = #{query.requestReason}
+           </if>
+           <if test="query.auditResult != null">
+              and audit_result = #{query.auditResult}
+           </if>
+           <if test="query.finishTime != null">
+              and finish_time = #{query.finishTime}
+           </if>
+       </where>
+    </sql>
+
+   <select id="selectByPage" resultType="com.chinapost.sd.effective.system.domain.po.SysAuditorPO">
+       select * from sys_auditor
+       <include refid="List_Where_Clause"/>
+   </select>
+
+   <select id="selectByList" resultType="com.chinapost.sd.effective.system.domain.po.SysAuditorPO">
+       select * from sys_auditor
+       <include refid="List_Where_Clause"/>
+   </select>
+</mapper>

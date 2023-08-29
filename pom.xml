@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.chinapost.sd.boot</groupId>
+    <artifactId>sdpost-boot-parent</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>sdpost-effective-platform</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <description>
+    效能平台
+  </description>
+  <packaging>jar</packaging>
+  <properties>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <ui.path>${basedir}/admin-ui</ui.path>
+  </properties>
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>2.0.38</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.chinapost.sd.boot</groupId>
+      <artifactId>sdpost-boot-infrastructure</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.chinapost.sd.boot</groupId>
+      <artifactId>sdpost-boot-generator</artifactId>
+    </dependency>
+    <!-- springboot测试模块-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>eu.bitwalker</groupId>
+      <artifactId>UserAgentUtils</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+    </resources>
+    <plugins>
+      <!--            静态资源编译插件, 编译过一次以后可以注释掉-->
+      <plugin>
+        <groupId>com.github.eirslett</groupId>
+        <artifactId>frontend-maven-plugin</artifactId>
+        <version>1.12.1</version>
+        <configuration>
+          <workingDirectory>${ui.path}</workingDirectory>
+          <nodeVersion>v16.20.1</nodeVersion>
+        </configuration>
+        <executions>
+          <execution>
+            <id>install node and npm</id>
+            <goals>
+              <goal>install-node-and-npm</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>npm install</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>install --registry=https://registry.npmjs.org/</arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm run build</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run build:prod</arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- 将自己的项目单独打包成jar文件，指定main类，并且排除 application.properties 等配置文件 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>lib/</classpathPrefix>
+              <mainClass>com.chinapost.sd.effective.AdminApplication</mainClass>
+            </manifest>
+            <!-- 把配置文件和静态资源加入classpath -->
+            <manifestEntries>
+              <Class-Path>config/ static/</Class-Path>
+            </manifestEntries>
+          </archive>
+          <!--将配置文件排除掉，不打包到jar文件内-->
+          <excludes>
+            <exclude>*.properties</exclude>
+            <exclude>**/*.properties</exclude>
+            <exclude>*.yml</exclude>
+            <exclude>*.conf</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+
+      <!-- assembly插件 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <finalName>${project.artifactId}</finalName>
+          <!--指定assembly配置文件配置-->
+          <descriptors>
+            <descriptor>/assembly/assembly.xml</descriptor>
+          </descriptors>
+          <!--打包tar.gz输出位置-->
+          <outputDirectory>output</outputDirectory>
+          <!-- <appendAssemblyId>false</appendAssemblyId> -->
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <repositories>
+    <repository>
+      <id>nexus</id>
+      <name>sdpost nexus</name>
+      <url>http://192.169.0.220/repository/maven-public/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>nexus-public</id>
+      <name>sdpost nexus-public</name>
+      <url>http://192.169.0.220/repository/maven-public/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+</project>

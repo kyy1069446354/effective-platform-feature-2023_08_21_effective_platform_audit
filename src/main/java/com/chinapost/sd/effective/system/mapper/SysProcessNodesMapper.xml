@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinapost.sd.effective.system.mapper.SysProcessNodesMapper">
+
+    <sql id="Base_Column_List">
+        id,
+        request_form_id,
+        requester_id,
+        requester_name,
+        audit_order,
+        auditor_id,
+        auditor_name,
+        audit_type,
+        audit_result,
+        audit_advise,
+        audit_date,
+        creator_id,
+        creator_name,
+        create_time,
+        updater_id,
+        updater_name,
+        update_time
+    </sql>
+
+    <sql id="List_Where_Clause">
+        <where>
+           <if test="query.id != null">
+              and id = #{query.id}
+           </if>
+           <if test="query.requestFormId != null">
+              and request_form_id = #{query.requestFormId}
+           </if>
+           <if test="query.requesterId != null">
+              and requester_id = #{query.requesterId}
+           </if>
+           <if test="query.requesterName != null">
+              and requester_name = #{query.requesterName}
+           </if>
+           <if test="query.auditOrder != null">
+              and audit_order = #{query.auditOrder}
+           </if>
+           <if test="query.auditorId != null">
+              and auditor_id = #{query.auditorId}
+           </if>
+           <if test="query.auditorName != null">
+              and auditor_name = #{query.auditorName}
+           </if>
+           <if test="query.auditType != null">
+              and audit_type = #{query.auditType}
+           </if>
+           <if test="query.auditResult != null">
+              and audit_result = #{query.auditResult}
+           </if>
+           <if test="query.auditAdvise != null">
+              and audit_advise = #{query.auditAdvise}
+           </if>
+           <if test="query.auditDate != null">
+              and audit_date = #{query.auditDate}
+           </if>
+       </where>
+    </sql>
+
+   <select id="selectByPage" resultType="com.chinapost.sd.effective.system.domain.po.SysProcessNodesPO">
+       select * from sys_process_nodes
+       <include refid="List_Where_Clause"/>
+   </select>
+
+   <select id="selectByList" resultType="com.chinapost.sd.effective.system.domain.po.SysProcessNodesPO">
+       select * from sys_process_nodes
+       <include refid="List_Where_Clause"/>
+   </select>
+</mapper>

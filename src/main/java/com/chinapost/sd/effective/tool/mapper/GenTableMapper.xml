@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinapost.sd.effective.tool.mapper.GenTableMapper">
+
+    <sql id="Base_Column_List">
+        id,
+        name,
+        comment,
+        sub_table_name,
+        sub_table_fk_name,
+        class_name,
+        tpl_category,
+        package_name,
+        module_name,
+        business_name,
+        function_name,
+        function_author,
+        options,
+        remark,
+        creator_id,
+        creator_name,
+        create_time,
+        updater_id,
+        updater_name,
+        update_time
+    </sql>
+
+    <sql id="List_Where_Clause">
+        <where>
+           <if test="query.name != null and query.name != ''">
+              and name like concat('%', concat(#{query.name}, '%'))
+           </if>
+           <if test="query.comment != null and query.comment != ''">
+              and comment like concat('%', concat(#{query.comment}, '%'))
+           </if>
+            <if test="query.beginTime != null">
+                and create_time &gt; #{query.beginTime}
+            </if>
+            <if test="query.endTime != null">
+                and create_time &lt; #{query.endTime}
+            </if>
+       </where>
+    </sql>
+    <select id="selectByPage" resultType="com.chinapost.sd.effective.tool.domain.vo.PageGenTableVO">
+        select * from sys_gen_table
+        <include refid="List_Where_Clause"/>
+        order by id
+    </select>
+    <select id="selectByList" resultType="com.chinapost.sd.effective.tool.domain.po.GenTablePO">
+        select * from sys_gen_table
+        <include refid="List_Where_Clause"/>
+        order by id
+    </select>
+</mapper>

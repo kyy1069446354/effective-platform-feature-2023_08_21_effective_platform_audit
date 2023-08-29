@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinapost.sd.effective.system.mapper.SysOperationLogMapper">
+
+    <sql id="Base_Column_List">
+        id,
+        business_type,
+        request_method,
+        title,
+        request_url,
+        called_method,
+        operator_type,
+        user_id,
+        username,
+        operator_ip,
+        operator_location,
+        dept_id,
+        dept_name,
+        operation_param,
+        operation_result,
+        status,
+        error_stack,
+        operation_time,
+        deleted,
+        creator_id,
+        creator_name,
+        create_time,
+        updater_id,
+        updater_name,
+        update_time
+    </sql>
+
+    <sql id="List_Where_Clause">
+        <where>
+            <if test="query.id != null">
+                and id = #{query.id}
+            </if>
+            <if test="query.businessType != null">
+                and business_type = #{query.businessType}
+            </if>
+            <if test="query.requestMethod != null">
+                and request_method = #{query.requestMethod}
+            </if>
+            <if test="query.title != null">
+                and title = #{query.title}
+            </if>
+            <if test="query.requestUrl != null">
+                and request_url = #{query.requestUrl}
+            </if>
+            <if test="query.calledMethod != null">
+                and called_method = #{query.calledMethod}
+            </if>
+            <if test="query.operatorType != null">
+                and operator_type = #{query.operatorType}
+            </if>
+            <if test="query.userId != null">
+                and user_id = #{query.userId}
+            </if>
+            <if test="query.username != null">
+                and username = #{query.username}
+            </if>
+            <if test="query.operatorIp != null">
+                and operator_ip = #{query.operatorIp}
+            </if>
+            <if test="query.operatorLocation != null">
+                and operator_location = #{query.operatorLocation}
+            </if>
+            <if test="query.deptId != null">
+                and dept_id = #{query.deptId}
+            </if>
+            <if test="query.deptName != null">
+                and dept_name = #{query.deptName}
+            </if>
+            <if test="query.operationParam != null">
+                and operation_param = #{query.operationParam}
+            </if>
+            <if test="query.operationResult != null">
+                and operation_result = #{query.operationResult}
+            </if>
+            <if test="query.status != null">
+                and status = #{query.status}
+            </if>
+            <if test="query.errorStack != null">
+                and error_stack = #{query.errorStack}
+            </if>
+            <if test="query.operationTime != null">
+                and operation_time = #{query.operationTime}
+            </if>
+            <if test="query.deleted != null">
+                and deleted = #{query.deleted}
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectByPage" resultType="com.chinapost.sd.effective.system.domain.po.SysOperationLogPO">
+        select * from sys_operation_log
+        <include refid="List_Where_Clause"/>
+    </select>
+
+    <select id="selectByList" resultType="com.chinapost.sd.effective.system.domain.po.SysOperationLogPO">
+        select * from sys_operation_log
+        <include refid="List_Where_Clause"/>
+    </select>
+
+    <delete id="deleteAll">
+        TRUNCATE TABLE sys_operation_log
+    </delete>
+</mapper>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinapost.sd.effective.system.mapper.SysVpnRequestMapper">
+
+    <sql id="Base_Column_List">
+        id,
+        requester_id,
+        requester_name,
+        requester_department,
+        requester_phone_number,
+        requester_email,
+        request_date,
+        request_reason,
+        safeguard_suggest,
+        province_safeguard_suggest,
+        request_system,
+        note,
+        audit_result,
+        finish_time,
+        creator_id,
+        creator_name,
+        create_time,
+        updater_id,
+        updater_name,
+        update_time
+    </sql>
+
+    <sql id="List_Where_Clause">
+        <where>
+           <if test="query.id != null">
+              and id = #{query.id}
+           </if>
+           <if test="query.requesterId != null">
+              and requester_id = #{query.requesterId}
+           </if>
+           <if test="query.requesterName != null">
+              and requester_name = #{query.requesterName}
+           </if>
+           <if test="query.requesterDepartment != null">
+              and requester_department = #{query.requesterDepartment}
+           </if>
+           <if test="query.requesterPhoneNumber != null">
+              and requester_phone_number = #{query.requesterPhoneNumber}
+           </if>
+           <if test="query.requesterEmail != null">
+              and requester_email = #{query.requesterEmail}
+           </if>
+           <if test="query.requestDate != null">
+              and request_date = #{query.requestDate}
+           </if>
+           <if test="query.requestReason != null">
+              and request_reason = #{query.requestReason}
+           </if>
+           <if test="query.safeguardSuggest != null">
+              and safeguard_suggest = #{query.safeguardSuggest}
+           </if>
+           <if test="query.provinceSafeguardSuggest != null">
+              and province_safeguard_suggest = #{query.provinceSafeguardSuggest}
+           </if>
+           <if test="query.requestSystem != null">
+              and request_system = #{query.requestSystem}
+           </if>
+           <if test="query.note != null">
+              and note = #{query.note}
+           </if>
+           <if test="query.auditResult != null">
+              and audit_result = #{query.auditResult}
+           </if>
+           <if test="query.finishTime != null">
+              and finish_time = #{query.finishTime}
+           </if>
+       </where>
+    </sql>
+
+   <select id="selectByPage" resultType="com.chinapost.sd.effective.system.domain.po.SysVpnRequestPO">
+       select * from sys_vpn_request
+       <include refid="List_Where_Clause"/>
+   </select>
+
+   <select id="selectByList" resultType="com.chinapost.sd.effective.system.domain.po.SysVpnRequestPO">
+       select * from sys_vpn_request
+       <include refid="List_Where_Clause"/>
+   </select>
+</mapper>

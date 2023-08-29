@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinapost.sd.effective.system.mapper.SysNoticeMapper">
+
+    <sql id="Base_Column_List">
+        id,
+        title,
+        type,
+        content,
+        status,
+        remark,
+        deleted,
+        creator_id,
+        creator_name,
+        create_time,
+        updater_id,
+        updater_name,
+        update_time
+    </sql>
+
+    <sql id="List_Where_Clause">
+        <where>
+           <if test="query.type != null">
+              and type = #{query.type}
+           </if>
+            <if test="query.title != null and query.title != ''">
+                and title like concat('%', concat(#{query.title}, '%'))
+            </if>
+            <if test="query.creatorName != null and query.creatorName != ''">
+                and creator_name like concat('%', concat(#{query.creatorName}, '%'))
+            </if>
+       </where>
+    </sql>
+
+   <select id="selectByPage" resultType="com.chinapost.sd.effective.system.domain.po.SysNoticePO">
+       select * from sys_notice
+       <include refid="List_Where_Clause"/>
+   </select>
+
+   <select id="selectByList" resultType="com.chinapost.sd.effective.system.domain.po.SysNoticePO">
+       select * from sys_notice
+       <include refid="List_Where_Clause"/>
+   </select>
+</mapper>

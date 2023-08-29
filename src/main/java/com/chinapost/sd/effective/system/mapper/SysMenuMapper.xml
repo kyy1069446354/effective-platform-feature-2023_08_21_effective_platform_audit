@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinapost.sd.effective.system.mapper.SysMenuMapper">
+
+    <sql id="Base_Column_List">
+        id,
+        name,
+        parent_id,
+        order_num,
+        path,
+        component,
+        query,
+        is_external,
+        is_cache,
+        menu_type,
+        is_visible,
+        status,
+        perms,
+        icon,
+        remark,
+        deleted,
+        creator_id,
+        creator_name,
+        create_time,
+        updater_id,
+        updater_name,
+        update_time
+    </sql>
+
+    <sql id="List_Where_Clause">
+        <where>
+           <if test="query.name != null and query.name != ''">
+              and name like concat('%',concat(#{query.name},'%'))
+           </if>
+           <if test="query.parentId != null">
+              and parent_id = #{query.parentId}
+           </if>
+           <if test="query.menuType != null">
+              and menu_type = #{query.menuType}
+           </if>
+           <if test="query.isVisible != null">
+              and is_visible = #{query.isVisible}
+           </if>
+           <if test="query.status != null">
+              and status = #{query.status}
+           </if>
+       </where>
+    </sql>
+
+   <select id="selectByList" resultType="com.chinapost.sd.effective.system.domain.po.SysMenuPO">
+       select * from sys_menu
+       <include refid="List_Where_Clause"/>
+   </select>
+    <select id="listAll" resultType="com.chinapost.sd.effective.system.domain.po.SysMenuPO">
+        select * from sys_menu
+    </select>
+    <select id="selectMenuListByUserId" resultType="com.chinapost.sd.effective.system.domain.po.SysMenuPO">
+        select t1.* from sys_menu t1
+        inner join sys_role_menu t2 on t1.id = t2.menu_id
+        inner join sys_user_role t3 on t3.role_id = t2.role_id
+        where t3.user_id = #{userId}
+    </select>
+</mapper>
