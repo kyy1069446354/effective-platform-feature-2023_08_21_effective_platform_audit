@@ -24,7 +24,7 @@ public interface SysAuditorMapper extends BaseMapperEx<SysAuditorPO> {
 
 
  Page<SysAuditorPO> selectByPage(@Param("page") Page<SysAuditorPO> page,
-                                @Param("query") SysAuditorPageQuery query);
+                                 @Param("query") SysAuditorPageQuery query);
 
 
  List<SysAuditorPO> selectByList(@Param("query") SysAuditorListQuery query);
