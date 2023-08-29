@@ -9,7 +9,7 @@ import lombok.ToString;
  * 审核员表DeleteCommand
  *
  * @author admin
- * @since 2023-08-28
+ * @since 2023-08-29
  */
 @Getter
 @Setter
@@ -17,8 +17,8 @@ import lombok.ToString;
 @Schema(name = "审核员表DeleteCommand")
 public class SysAuditorDeleteCommand{
       /**
-      * 申请工单ID
+      * 主键
       */
-      @Schema(description = "申请工单ID")
+      @Schema(description = "主键")
       private Long id;
 }

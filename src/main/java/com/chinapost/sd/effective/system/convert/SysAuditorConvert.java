@@ -19,7 +19,7 @@ import com.chinapost.sd.effective.system.domain.vo.query.SysAuditorPageQuery;
  * SysAuditorConvert
  *
  * @author admin
- * @since 2023-08-28
+ * @since 2023-08-29
  */
 @Mapper
 public interface SysAuditorConvert {

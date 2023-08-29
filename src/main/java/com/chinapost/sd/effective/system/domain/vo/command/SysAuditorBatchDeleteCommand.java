@@ -10,7 +10,7 @@ import lombok.ToString;
  * 审核员表BatchDeleteCommand
  *
  * @author admin
- * @since 2023-08-28
+ * @since 2023-08-29
  */
 @Getter
 @Setter

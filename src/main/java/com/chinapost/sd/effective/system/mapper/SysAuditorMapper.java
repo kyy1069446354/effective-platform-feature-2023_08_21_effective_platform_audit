@@ -17,7 +17,7 @@ import com.chinapost.sd.boot.infrastructure.base.BaseMapperEx;
  * 审核员表Mapper
  *
  * @author admin
- * @since 2023-08-28
+ * @since 2023-08-29
  */
 @Mapper
 public interface SysAuditorMapper extends BaseMapperEx<SysAuditorPO> {

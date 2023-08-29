@@ -30,7 +30,7 @@ import com.chinapost.sd.boot.infrastructure.base.ResponseResult;
  * SysAuditorController类
  *
  * @author admin
- * @since 2023-08-28
+ * @since 2023-08-29
  */
 @RestController
 @RequestMapping("/system/auditor")

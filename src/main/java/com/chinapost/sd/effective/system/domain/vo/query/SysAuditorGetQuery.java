@@ -9,7 +9,7 @@ import lombok.ToString;
  * 审核员表GetQuery
  *
  * @author admin
- * @since 2023-08-28
+ * @since 2023-08-29
  */
 @Getter
 @Setter
@@ -18,8 +18,8 @@ import lombok.ToString;
 public class SysAuditorGetQuery{
 
       /**
-      * 申请工单ID
+      * 主键
       */
-      @Schema(description = "申请工单ID")
+      @Schema(description = "主键")
       private Long id;
 }

@@ -10,7 +10,7 @@ import lombok.ToString;
  * 审核员表
  *
  * @author admin
- * @since 2023-08-28
+ * @since 2023-08-29
  */
 @Getter
 @Setter
@@ -18,97 +18,27 @@ import lombok.ToString;
 public class SysAuditor{
 
     /**
-    * 申请工单ID
+    * 主键
     */
     private Long id;
 
     /**
-    * 申请员工ID
+    * 审核人ID
     */
-    private Long requesterId;
+    private Long auditorId;
 
     /**
-    * 申请人姓名
+    * 审核人姓名
     */
-    private String requesterName;
+    private String auditorName;
 
     /**
-    * 系统名称
+    * 审核类型（0-vpn、1-机器）
     */
-    private String systemName;
+    private Integer auditType;
 
     /**
-    * 系统负责人
+    * 审核顺序
     */
-    private String systemHead;
-
-    /**
-    * 系统负责人联系方式
-    */
-    private Long systemHeadPhoneNumber;
-
-    /**
-    * 系统使用人员
-    */
-    private String systemUser;
-
-    /**
-    * 业务访问方式
-    */
-    private String businessAccessMethod;
-
-    /**
-    * 待安装的操作系统版本
-    */
-    private String osVersion;
-
-    /**
-    * 待安装的中间件版本
-    */
-    private String middlewareUser;
-
-    /**
-    * 待安装的数据库版本
-    */
-    private String databaseVersion;
-
-    /**
-    * 资源需求情况
-    */
-    private String resourceDemand;
-
-    /**
-    * CPU数量
-    */
-    private Integer cpuNum;
-
-    /**
-    * 内存数量(G)
-    */
-    private Integer memoryNum;
-
-    /**
-    * 磁盘空间(G)
-    */
-    private Integer diskSpace;
-
-    /**
-    * 申请日期
-    */
-    private LocalDateTime requestDate;
-
-    /**
-    * 申请原因
-    */
-    private String requestReason;
-
-    /**
-    * 审核结果，0-审核中，1-已通过，2-已拒绝，3-已撤销
-    */
-    private Integer auditResult;
-
-    /**
-    * 流程结束时间
-    */
-    private LocalDateTime finishTime;
+    private Integer auditOrder;
 }
