@@ -14,8 +14,8 @@ public enum AuditTypeEnum {
     /**
      * 审核类型
      */
-    VPN(0, "vpn"),
-    MACHINE(1, "机器");
+    VPN(1, "vpn"),
+    MACHINE(2, "机器");
 
     private final int value;
     private final String description;
