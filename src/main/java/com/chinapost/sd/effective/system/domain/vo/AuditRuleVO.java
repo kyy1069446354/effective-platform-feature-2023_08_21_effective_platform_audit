@@ -12,7 +12,7 @@ import lombok.ToString;
  * 审核规则表
  *
  * @author admin
- * @since 2023-08-29
+ * @since 2023-08-30
  */
 @Getter
 @Setter
@@ -33,10 +33,10 @@ public class AuditRuleVO{
     private Long auditRuleId;
 
     /**
-    * 审核类型（0-vpn、1-机器）
+    * 审核类型
     */
-    @Schema(description = "审核类型（0-vpn、1-机器）")
-    private Integer auditType;
+    @Schema(description = "审核类型")
+    private String auditType;
 
     /**
     * 规则状态（0-停用、1-启用）
@@ -53,4 +53,5 @@ public class AuditRuleVO{
     @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     @Schema(description = "创建时间")
     private LocalDateTime createTime;
+
 }

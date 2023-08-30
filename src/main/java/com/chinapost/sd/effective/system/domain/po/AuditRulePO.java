@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.chinapost.sd.boot.infrastructure.annotations.Excel;
 import com.chinapost.sd.boot.infrastructure.base.BasePO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -17,7 +16,7 @@ import lombok.ToString;
  * 审核规则表
  *
  * @author admin
- * @since 2023-08-29
+ * @since 2023-08-30
  */
 @Getter
 @Setter
@@ -39,10 +38,10 @@ public class AuditRulePO extends BasePO {
     private Long auditRuleId;
 
     /**
-    * 审核类型（0-vpn、1-机器）
+    * 审核类型
     */
     @TableField("audit_type")
-    private Integer auditType;
+    private String auditType;
 
     /**
     * 规则状态（0-停用、1-启用）
@@ -56,6 +55,6 @@ public class AuditRulePO extends BasePO {
     @TableField("note")
     private String note;
 
-
-
+    @TableField("create_time")
+    private LocalDateTime createTime;
 }

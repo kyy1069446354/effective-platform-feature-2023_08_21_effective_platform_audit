@@ -2,7 +2,6 @@ package com.chinapost.sd.effective.system.controller;
 
 import java.util.List;
 
-import com.chinapost.sd.boot.commons.utils.json.JacksonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,10 +30,10 @@ import com.chinapost.sd.boot.infrastructure.base.ResponseResult;
  * AuditRuleController类
  *
  * @author admin
- * @since 2023-08-29
+ * @since 2023-08-30
  */
 @RestController
-@RequestMapping("/system/Auditrule")
+@RequestMapping("/resource/auditrule")
 @Tag(name = "审核规则表API", description = "审核规则表API")
 public class AuditRuleController{
 
@@ -47,7 +46,6 @@ public class AuditRuleController{
     @PostMapping("/page")
     public ResponseResult<Page<AuditRuleVO>> page(@RequestBody AuditRulePageQuery query) {
         Page<AuditRule> auditRulePage = auditRuleService.page(query);
-        System.out.println("审核规则表列ssss表"+JacksonUtil.toString(auditRuleConvert.dtoPage2VoPage(auditRulePage)));
         return ResponseResult.success(auditRuleConvert.dtoPage2VoPage(auditRulePage));
     }
 

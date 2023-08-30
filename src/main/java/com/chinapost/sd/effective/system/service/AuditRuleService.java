@@ -22,7 +22,7 @@ import com.chinapost.sd.effective.system.domain.vo.query.AuditRulePageQuery;
  * AuditRuleService类
  *
  * @author admin
- * @since 2023-08-29
+ * @since 2023-08-30
  */
 @Service
 public class AuditRuleService {

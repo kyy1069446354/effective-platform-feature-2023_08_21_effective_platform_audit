@@ -19,7 +19,7 @@ import com.chinapost.sd.effective.system.domain.vo.query.AuditRulePageQuery;
  * AuditRuleConvert
  *
  * @author admin
- * @since 2023-08-29
+ * @since 2023-08-30
  */
 @Mapper
 public interface AuditRuleConvert {

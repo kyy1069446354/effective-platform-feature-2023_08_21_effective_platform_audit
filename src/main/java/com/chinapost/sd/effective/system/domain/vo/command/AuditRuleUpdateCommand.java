@@ -11,7 +11,7 @@ import lombok.ToString;
  * 审核规则表UpdateCommand
  *
  * @author admin
- * @since 2023-08-29
+ * @since 2023-08-30
  */
 @Getter
 @Setter
@@ -32,10 +32,10 @@ public class AuditRuleUpdateCommand{
     private Long auditRuleId;
 
     /**
-    * 审核类型（0-vpn、1-机器）
+    * 审核类型
     */
-    @Schema(description = "审核类型（0-vpn、1-机器）")
-    private Integer auditType;
+    @Schema(description = "审核类型")
+    private String auditType;
 
     /**
     * 规则状态（0-停用、1-启用）
